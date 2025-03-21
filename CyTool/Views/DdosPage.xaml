@@ -21,7 +21,7 @@
             </Button.Template>
         </Button>
 
-        <ListBox HorizontalAlignment="Center" Height="185" Margin="0,115,0,0" VerticalAlignment="Top" Width="446" ItemsSource="{Binding RequestLogs}"/>
+        <ListBox HorizontalAlignment="Center" Height="185" Margin="0,115,0,0" VerticalAlignment="Top" Width="529" ItemsSource="{Binding RequestLogs}"/>
         <Label Content="Link:" HorizontalAlignment="Left" Height="29" Margin="177,309,0,0" VerticalAlignment="Top" Width="45" Foreground="White" FontWeight="Bold" FontSize="15"/>
         <TextBox x:Name="CountTextBox" HorizontalAlignment="Left" Height="21" Margin="240,339,0,0" TextWrapping="Wrap" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="330" FontWeight="Bold"/>
         <Label Content="Count:" HorizontalAlignment="Left" Height="29" Margin="177,335,0,0" VerticalAlignment="Top" Width="58" Foreground="White" FontWeight="Bold" FontSize="15"/>

@@ -56,7 +56,7 @@ namespace CyTool.ViewModels
             RequestLogs.Add($"DDOS started on {TargetUrl} with {Count} requests.");
 
 
-            var listTasks = _model.PrepareAttack();
+            var listTasks = await _model.PrepareAttack();
             await _model.StartDdosAttack(listTasks);
 
             RequestLogs.Add("DDOS attack completed.");

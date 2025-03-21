@@ -26,5 +26,7 @@ namespace CyTool.Views
             InitializeComponent();
             DataContext = new DdosViewModel();
         }
+
+
     }
 }

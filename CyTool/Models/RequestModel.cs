@@ -34,7 +34,8 @@ namespace CyTool.Models
                         RequestLogs.Add($"Request sent to {TargetUrl}");
                     });
                 });
-                attacks.Add(attack);
+                if (attack != null)
+                    attacks.Add(attack);
             });
 
             return attacks;

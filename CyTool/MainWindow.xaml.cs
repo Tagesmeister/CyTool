@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using CyTool.Views; // Ensure that your AnalyseNetworkControl is in this namespace
+using CyTool.Views;
 
 namespace CyTool
 {
@@ -10,15 +10,10 @@ namespace CyTool
             InitializeComponent();
         }
 
-        // Click event handler for the "Analyse Network" button.
         private void AnalyseNetworkButton_Click(object sender, RoutedEventArgs e)
         {
-            // Debug message to ensure the event fires.
-
-            // Create an instance of your AnalyseNetworkControl.
             var analyseNetworkControl = new AnalyseNetworkControl();
 
-            // Create a new window to host the AnalyseNetworkControl.
             var networkWindow = new Window
             {
                 Title = "Analyse Network",
@@ -26,11 +21,10 @@ namespace CyTool
                 Width = 900,
                 Height = 600,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                Owner = this,     // Set the MainWindow as the owner.
-                Topmost = true    // Optionally set this to ensure it appears on top.
+                Owner = this,
+                Topmost = true
             };
 
-            // Show the new window.
             networkWindow.Show();
         }
 
@@ -56,7 +50,7 @@ namespace CyTool
         private void BruteForceButton_Click(object sender, RoutedEventArgs e)
         {
             var bruteForceControl = new BruteForceControl();
-            var networkWindow = new Window
+            var bfWindow = new Window
             {
                 Title = "Brute Force",
                 Content = bruteForceControl,
@@ -66,7 +60,22 @@ namespace CyTool
                 Owner = this,
                 Topmost = true
             };
-            networkWindow.Show();
+            bfWindow.Show();
+        }
+        private void DirectoryBruteforce_Click(object sender, RoutedEventArgs e)
+        {
+            var directoryBruteforceControl = new DirectoryBruteforceControl();
+            var dbfWindow = new Window
+            {
+                Title = "Directory Bruteforce",
+                Content = directoryBruteforceControl,
+                Width = 900,
+                Height = 600,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Owner = this,
+                Topmost = true
+            };
+            dbfWindow.Show();
         }
     }
 }

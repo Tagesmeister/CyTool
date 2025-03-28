@@ -89,7 +89,7 @@
                             Style="{StaticResource CyberButton}" 
                             Click="AnalyseNetworkButton_Click"/>
                     <Button Content="🚀 DDoS" Style="{StaticResource CyberButton}" Click="DDoSButton_Click" />
-                    <Button Content="🛡️ PenTest Suite" Style="{StaticResource CyberButton}" />
+                    <Button Content="🛡️ Directory Bruteforce" Style="{StaticResource CyberButton}" Click="DirectoryBruteforce_Click" />
                     <Button Content="🔍 Brute Force" Style="{StaticResource CyberButton}" Click="BruteForceButton_Click"/>
                     <Button Content="📊 Traffic Monitor" Style="{StaticResource CyberButton}" />
                 </StackPanel>

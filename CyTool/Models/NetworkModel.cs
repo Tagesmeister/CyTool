@@ -17,11 +17,11 @@ namespace CyTool.Models
     {
         public List<NetworkDevice> Devices { get; set; } = new List<NetworkDevice>();
 
-        public async Task StartScanNetwork(string localIPAdress)
+        public async Task StartScanNetwork(string localIPAddress)
         {
             Devices.Clear();
 
-            string splittedIP = localIPAdress.Replace(localIPAdress.Split('.')[3], "");
+            string splittedIP = localIPAddress.Substring(0, localIPAddress.LastIndexOf('.') + 1);
 
             var tasks = new List<Task>();
 
@@ -41,8 +41,14 @@ namespace CyTool.Models
                             string name = host.HostName;
                             Devices.Add(new NetworkDevice { IPAddress = IPAddress.Parse(ip), Ping = ping, PingReply = reply, IPHostEntry = host, name = name, Status = "Active" });
                         }
-                        catch (SocketException)
+                        catch (SocketException ex)
                         {
+                            Debug.WriteLine($"Failed to resolve hostname for IP: {ip}. Exception: {ex.Message}");
+                            Devices.Add(new NetworkDevice { IPAddress = IPAddress.Parse(ip), Ping = ping, PingReply = reply, IPHostEntry = null, name = "Unknown", Status = "Active" });
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Unexpected error for IP: {ip}. Exception: {ex.Message}");
                             Devices.Add(new NetworkDevice { IPAddress = IPAddress.Parse(ip), Ping = ping, PingReply = reply, IPHostEntry = null, name = "Unknown", Status = "Active" });
                         }
                     }
@@ -51,6 +57,7 @@ namespace CyTool.Models
 
             await Task.WhenAll(tasks);
         }
+
 
     }
 }

@@ -5,21 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="#FF202124" Margin="20">
+    <Grid Background="#FF202124" Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="71.28" />
+            <RowDefinition Height="Auto" MinHeight="100" />
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Directory Enumeration Tool" 
                    FontSize="28" FontWeight="Bold" 
                    Foreground="White" 
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,20" />
+                   Margin="0,0,0,20" Width="364" />
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,57,0,100" Grid.RowSpan="3" Width="400">
             <TextBlock Text="Base URL:" Foreground="White" FontSize="16"/>
             <TextBox Text="{Binding BaseUrl, UpdateSourceTrigger=PropertyChanged}" 
                      Width="400" Height="30" 
@@ -31,31 +31,31 @@
                      BorderThickness="1" />
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20" Width="609">
             <Button Content="Start Enumeration"
                     Style="{StaticResource CyberButton}"
                     Command="{Binding StartEnumerationCommand}"
-                    Width="231" 
-                    Margin="0,0,10,0" />
+                    Width="233" 
+                    Margin="0,0,10,0" Height="50" />
             <Button Content="Stop"
                     Style="{StaticResource CyberButton}"
                     Command="{Binding StopEnumerationCommand}"
-                    Width="122" />
+                    Width="118" Height="50" />
             <Button Content="Export Output"
                     Style="{StaticResource CyberButton}"
                     Command="{Binding ExportOutputCommand}"
-                    Width="185"
-                    Margin="10,0,0,0" />
+                    Width="191"
+                    Margin="10,0,0,0" Height="49" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" Width="500">
             <TextBlock Text="Output:" 
                        FontWeight="Bold" 
                        Foreground="White" 
                        Margin="0,0,0,5" 
                        FontSize="16" />
             <TextBox Text="{Binding OutputLog, UpdateSourceTrigger=PropertyChanged}"
-                     Width="500" Height="200" 
+                     Width="500" Height="138" 
                      IsReadOnly="True" 
                      VerticalScrollBarVisibility="Auto" 
                      TextWrapping="Wrap"

@@ -14,9 +14,21 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,20"/>
             <Button Content="Scan Network"
-                    Width="150"
-                    Margin="10"
-                    Command="{Binding ScanNetworkCommand}"/>
+        Width="212"
+        Margin="10"
+        Command="{Binding ScanNetworkCommand}"
+        Height="24"
+        Style="{StaticResource CyberButton}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
             <TextBlock Text="{Binding Status}"
                        FontSize="16"
                        Foreground="LightGray"
@@ -26,21 +38,22 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="IP Address" DisplayMemberBinding="{Binding IPAddress}" Width="150"/>
-                        <GridViewColumn Header="MAC Address" DisplayMemberBinding="{Binding MacAddress}" Width="150"/>
-                        <GridViewColumn Header="Host Name" DisplayMemberBinding="{Binding HostName}" Width="150"/>
+                        <GridViewColumn Header="Host Name" DisplayMemberBinding="{Binding name}" Width="150"/>
+                        <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="150"/>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBlock Text="Additional Network Info:" 
-                       FontSize="18" 
-                       Foreground="White" 
-                       Margin="10"/>
-            <ScrollViewer Height="150" Margin="10">
-                <TextBlock Text="{Binding AdditionalInfo}"
-                           FontSize="14"
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Local IP:" 
+                           FontSize="18" 
+                           Foreground="White" 
+                           Margin="10" Width="69"/>
+                <TextBlock Text="{Binding LocalIPAddress}"
+                           FontSize="18"
                            Foreground="LightGray"
-                           TextWrapping="Wrap"/>
-            </ScrollViewer>
+                           TextWrapping="Wrap" Width="383" VerticalAlignment="Center"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

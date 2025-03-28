@@ -11,7 +11,7 @@
     <Grid Background="#FF2C2E33">
         <Label Content="DDOS TOOL" HorizontalAlignment="Center" Height="42" Margin="0,25,0,0" VerticalAlignment="Top" Width="167" Background="#FF2C2E33" Foreground="White" FontSize="28" FontWeight="Bold"/>
         <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="21" Margin="240,313,0,0" TextWrapping="Wrap" Text="{Binding TargetUrl, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="330" FontWeight="Bold"/>
-        <Button x:Name="SubmitButton" Content="Button" HorizontalAlignment="Left" Height="36" Margin="240,370,0,0" VerticalAlignment="Top" Width="180" Background="#FF4285F4" Foreground="White" FontWeight="Bold" FontSize="15" BorderBrush="White" BorderThickness="0" Command="{Binding SubmitDdos}">
+        <Button x:Name="SubmitButton" Content="Start DDOS" HorizontalAlignment="Left" Height="36" Margin="240,370,0,0" VerticalAlignment="Top" Width="180" Background="#FF4285F4" Foreground="White" FontWeight="Bold" FontSize="15" BorderBrush="White" BorderThickness="0" Command="{Binding SubmitDdos}">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8">

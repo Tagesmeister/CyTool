@@ -16,12 +16,13 @@ namespace CyTool.ViewModels
             set { _status = value; OnPropertyChanged(nameof(Status)); }
         }
 
-        private string _additionalInfo;
-        public string AdditionalInfo
+        private string _localIp;
+        public string LocalIp
         {
-            get => _additionalInfo;
-            set { _additionalInfo = value; OnPropertyChanged(nameof(AdditionalInfo)); }
+            get => _localIp;
+            set { _localIp = value; OnPropertyChanged(nameof(LocalIp)); }
         }
+
 
         public ObservableCollection<NetworkDevice> Devices { get; set; }
         public ICommand ScanNetworkCommand { get; }
@@ -33,15 +34,16 @@ namespace CyTool.ViewModels
             _networkModel = new NetworkModel();
             Devices = new ObservableCollection<NetworkDevice>();
             ScanNetworkCommand = new RelayCommand(async () => await ScanNetworkAsync());
-            Status = "Ready for network analysis.";
 
-            AdditionalInfo = _networkModel.GetLocalNetworkInfo().ToString();
+            Status = "Ready for network analysis.";
+            _localIp = NetworkInfo.GetLocalIPAddress();
         }
 
         private async Task ScanNetworkAsync()
         {
             Status = "Scanning network...";
-            await _networkModel.ScanNetworkAsync();
+
+            await _networkModel.StartScanNetwork(_localIp);
             Devices.Clear();
             foreach (var device in _networkModel.Devices)
                 Devices.Add(device);

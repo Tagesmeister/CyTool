@@ -49,7 +49,7 @@
                            FontSize="18" 
                            Foreground="White" 
                            Margin="10" Width="69"/>
-                <TextBlock Text="{Binding LocalIPAddress}"
+                <TextBlock Text="{Binding LocalIp}"
                            FontSize="18"
                            Foreground="LightGray"
                            TextWrapping="Wrap" Width="383" VerticalAlignment="Center"/>

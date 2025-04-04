@@ -91,7 +91,7 @@
                     <Button Content="🚀 DDoS" Style="{StaticResource CyberButton}" Click="DDoSButton_Click" />
                     <Button Content="🛡️ Directory Bruteforce" Style="{StaticResource CyberButton}" Click="DirectoryBruteforce_Click" />
                     <Button Content="🔍 Brute Force" Style="{StaticResource CyberButton}" Click="BruteForceButton_Click"/>
-                    <Button Content="📊 Traffic Monitor" Style="{StaticResource CyberButton}" />
+                    <Button Content="📊 Password Finder" Style="{StaticResource CyberButton}" Click="PasswordFinder_Click" />
                 </StackPanel>
             </Grid>
         </Border>

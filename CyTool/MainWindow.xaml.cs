@@ -77,5 +77,23 @@ namespace CyTool
             };
             dbfWindow.Show();
         }
+
+        private void PasswordFinder_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordFinderControl passwordFinderControl = new PasswordFinderControl();
+            var pfWindow = new Window
+            {
+                Title = "Password Finder",
+                Content = passwordFinderControl,
+                Width = 900,
+                Height = 600,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Owner = this,
+                Topmost = true
+            };
+           
+
+            pfWindow.Show();
+        }
     }
 }

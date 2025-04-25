@@ -92,6 +92,7 @@
                     <Button Content="🛡️ Directory Bruteforce" Style="{StaticResource CyberButton}" Click="DirectoryBruteforce_Click" />
                     <Button Content="🔍 Brute Force" Style="{StaticResource CyberButton}" Click="BruteForceButton_Click"/>
                     <Button Content="📊 Password Finder" Style="{StaticResource CyberButton}" Click="PasswordFinder_Click" />
+                    <Button Content="E-Mail Data Leak Checker" Style="{StaticResource CyberButton}" Click="DataLeakChecker_Click" />
                 </StackPanel>
             </Grid>
         </Border>

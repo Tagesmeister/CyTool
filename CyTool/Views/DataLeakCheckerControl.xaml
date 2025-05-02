@@ -9,18 +9,12 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Header -->
             <RowDefinition Height="Auto"/>
-            <!-- Input + Button -->
             <RowDefinition Height="Auto"/>
-            <!-- ProgressBar -->
             <RowDefinition Height="*"/>
-            <!-- Results -->
             <RowDefinition Height="Auto"/>
-            <!-- Status -->
         </Grid.RowDefinitions>
 
-        <!-- Header -->
         <TextBlock Grid.Row="0"
                    Text="Data Leak Checker"
                    FontSize="28"
@@ -29,7 +23,6 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,20"/>
 
-        <!-- Email + Check -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Email:"
                        VerticalAlignment="Center"
@@ -52,7 +45,6 @@
                     Height="30"/>
         </StackPanel>
 
-        <!-- Busy indicator -->
         <ProgressBar Grid.Row="2"
                      Height="6"
                      Margin="0,15,0,15"
@@ -70,7 +62,6 @@
             </ProgressBar.Style>
         </ProgressBar>
 
-        <!-- Results grid -->
         <Border Grid.Row="3"
                 Background="#FF2A2D31"
                 CornerRadius="8"
@@ -113,7 +104,6 @@
             </DataGrid>
         </Border>
 
-        <!-- Status message -->
         <TextBlock Grid.Row="4"
                    Text="{Binding StatusMessage}"
                    HorizontalAlignment="Center"

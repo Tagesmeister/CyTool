@@ -24,7 +24,6 @@
             <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" 
                      Width="300" Margin="0,0,0,10" />
 
-            <!-- Advanced Settings Section -->
             <Expander Header="Advanced Settings" Foreground="White" IsExpanded="False" Margin="0,10,0,10">
                 <StackPanel Orientation="Vertical" Margin="10">
                     <TextBlock Text="Request Method:" Foreground="White"/>
@@ -45,7 +44,6 @@
                     <TextBox Text="{Binding LogoutUrl, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="0,0,0,10" />
                 </StackPanel>
             </Expander>
-            <!-- End Advanced Settings -->
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <Button Content="Start Brute Force"

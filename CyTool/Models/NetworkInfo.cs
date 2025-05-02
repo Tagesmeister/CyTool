@@ -5,7 +5,6 @@ namespace CyTool.Models
 {
     public class NetworkInfo
     {
-
         public static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());

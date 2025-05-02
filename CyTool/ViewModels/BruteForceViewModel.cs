@@ -126,7 +126,7 @@ namespace CyTool.ViewModels
                             url += $"&{AdditionalQuery}";
                         response = await client.GetAsync(url, token);
                     }
-                    else // POST
+                    else
                     {
                         var formData = new System.Collections.Generic.List<KeyValuePair<string, string>>
                         {

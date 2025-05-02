@@ -26,7 +26,6 @@ namespace CyTool
             var apiKey = Configuration["IntelX:ApiKey"];
             var vm = new DataLeakCheckerViewModel(apiKey);
             var window = new MainWindow { DataContext = vm };
-            window.Show();
         }
     }
 

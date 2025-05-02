@@ -24,7 +24,6 @@ namespace CyTool.Commands
         }
     }
 
-    // Generic version for commands that require a parameter.
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;
